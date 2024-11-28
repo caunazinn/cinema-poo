@@ -1,12 +1,11 @@
 import java.util.ArrayList;
-
-public class Sala {
+class Sala {
     private int idSala;
     private int capacidadeSala;
     private String descricao;
-    private String status; // Ativo ou Inativo
+    private String status;
+    private static ArrayList<Sala> salas = new ArrayList<>();
 
-    // Construtor
     public Sala(int idSala, int capacidadeSala, String descricao, String status) {
         this.idSala = idSala;
         this.capacidadeSala = capacidadeSala;
@@ -14,7 +13,33 @@ public class Sala {
         this.status = status;
     }
 
-    // Getters e Setters
+    public boolean cadastrar(Sala sala) {
+        return salas.add(sala);
+    }
+
+    public boolean editar(Sala sala) {
+        for (int i = 0; i < salas.size(); i++) {
+            if (salas.get(i).getIdSala() == sala.getIdSala()) {
+                salas.set(i, sala);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Sala consultar(int idSala) {
+        for (Sala s : salas) {
+            if (s.getIdSala() == idSala) {
+                return s;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Sala> listar() {
+        return salas;
+    }
+
     public int getIdSala() {
         return idSala;
     }
@@ -45,16 +70,5 @@ public class Sala {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    // Método para exibir os detalhes da sala
-    public void exibirDetalhes() {
-        System.out.println("ID: " + idSala + ", Capacidade: " + capacidadeSala + ", Descrição: " + descricao +
-                ", Status: " + status);
-    }
-
-    // Listagem de salas
-    public static ArrayList<Sala> listarSalas(ArrayList<Sala> listaSalas) {
-        return listaSalas;
     }
 }

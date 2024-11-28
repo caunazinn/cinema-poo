@@ -1,14 +1,10 @@
 import java.util.ArrayList;
-
-public class Ator extends Pessoa {
+class Ator extends Pessoa {
     private int registro;
-    private ArrayList<String> filmesParticipados;
-
 
     public Ator(String cpf, String nome, String email, int registro) {
         super(cpf, nome, email);
         this.registro = registro;
-        this.filmesParticipados = new ArrayList<>();
     }
 
     public int getRegistro() {
@@ -19,20 +15,23 @@ public class Ator extends Pessoa {
         this.registro = registro;
     }
 
-    public ArrayList<String> getFilmesParticipados() {
-        return filmesParticipados;
+    public boolean cadastrar(Ator ator) {
+        // Lógica de cadastro
+        return true;
     }
 
-    public void adicionarFilme(String filme) {
-        filmesParticipados.add(filme);
+    public boolean editar(Ator ator) {
+        // Lógica de edição
+        return true;
     }
 
-    @Override
-    public void exibirDetalhes() {
-        System.out.println("Ator: " + getNome());
-        System.out.println("CPF: " + getCpf());
-        System.out.println("E-mail: " + getEmail());
-        System.out.println("Registro: " + registro);
-        System.out.println("Filmes Participados: " + filmesParticipados);
+    public Ator consultar(int registro) {
+        // Lógica de consulta
+        return this;
     }
+
+    public ArrayList<Ator> listar() {
+        return new ArrayList<>();
+    }
+
 }

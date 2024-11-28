@@ -1,8 +1,7 @@
-public abstract class Pessoa {
+abstract class Pessoa {
     private String cpf;
     private String nome;
     private String email;
-
 
     public Pessoa(String cpf, String nome, String email) {
         this.cpf = cpf;
@@ -34,7 +33,4 @@ public abstract class Pessoa {
         this.email = email;
     }
 
-    //mAB
-    public abstract void exibirDetalhes();
 }
-

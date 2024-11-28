@@ -1,13 +1,10 @@
 import java.util.ArrayList;
-
-public class Filme {
+class Filme {
     private int idFilme;
     private String titulo;
     private int classificacao;
     private Genero genero;
     private String status;
-
-    private static ArrayList<Filme> listaFilmes = new ArrayList<>();
 
     public Filme(int idFilme, String titulo, int classificacao, Genero genero, String status) {
         this.idFilme = idFilme;
@@ -17,7 +14,6 @@ public class Filme {
         this.status = status;
     }
 
-    // Getters e Setters
     public int getIdFilme() {
         return idFilme;
     }
@@ -58,42 +54,19 @@ public class Filme {
         this.status = status;
     }
 
-    public static void cadastrarFilme(Filme filme) {
-        listaFilmes.add(filme);
-        System.out.println("Filme cadastrado com sucesso!");
+    public boolean cadastrar(Filme filme) {
+        return true;
     }
 
-    public static Filme consultarFilme(int idFilme) {
-        for (Filme filme : listaFilmes) {
-            if (filme.getIdFilme() == idFilme) {
-                return filme;
-            }
-        }
-        System.out.println("Filme não encontrado.");
-        return null;
+    public boolean editar(Filme filme) {
+        return true;
     }
 
-    public static void editarFilme(int idFilme, String novoTitulo, int novaClassificacao, Genero novoGenero, String novoStatus) {
-        Filme filme = consultarFilme(idFilme);
-        if (filme != null) {
-            filme.setTitulo(novoTitulo);
-            filme.setClassificacao(novaClassificacao);
-            filme.setGenero(novoGenero);
-            filme.setStatus(novoStatus);
-            System.out.println("Filme editado com sucesso!");
-        }
+    public Filme consultar(int idFilme) {
+        return this;
     }
 
-    public static void listarFilmes() {
-        if (listaFilmes.isEmpty()) {
-            System.out.println("Nenhum filme cadastrado.");
-        } else {
-            System.out.println("Lista de Filmes:");
-            for (Filme filme : listaFilmes) {
-                System.out.println("ID: " + filme.getIdFilme() + ", Título: " + filme.getTitulo() +
-                        ", Classificação: " + filme.getClassificacao() + ", Gênero: " + filme.getGenero().getDescricao() +
-                        ", Status: " + filme.getStatus());
-            }
-        }
+    public ArrayList<Filme> listar() {
+        return new ArrayList<>();
     }
 }

@@ -1,21 +1,53 @@
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Sessao {
     private int idSessao;
-    private LocalDateTime dataHoraSessao;
+    private String dataHoraSessao;
     private Filme filme;
     private Sala sala;
-    private Funcionario funcionario; // Responsável pela sessão
-    private String status; // Ativo ou Inativo
+    private Funcionario funcionario;
+    private String status;
+    private static ArrayList<Sessao> sessoes = new ArrayList<>();
 
-    // Construtor
-    public Sessao(int idSessao, LocalDateTime dataHoraSessao, Filme filme, Sala sala, Funcionario funcionario, String status) {
+    public Sessao(int idSessao, String dataHoraSessao, Filme filme, Sala sala, Funcionario funcionario, String status) {
         this.idSessao = idSessao;
         this.dataHoraSessao = dataHoraSessao;
         this.filme = filme;
         this.sala = sala;
         this.funcionario = funcionario;
         this.status = status;
+    }
+
+    public boolean cadastrar(Sessao sessao) {
+        for (Sessao s : sessoes) {
+            if (s.getIdSessao() == sessao.getIdSessao()) {
+                return false; // Sessão com ID duplicado
+            }
+        }
+        return sessoes.add(sessao);
+    }
+
+    public boolean editar(Sessao sessao) {
+        for (int i = 0; i < sessoes.size(); i++) {
+            if (sessoes.get(i).getIdSessao() == sessao.getIdSessao()) {
+                sessoes.set(i, sessao);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Sessao consultar(int idSessao) {
+        for (Sessao s : sessoes) {
+            if (s.getIdSessao() == idSessao) {
+                return s;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Sessao> listar() {
+        return sessoes;
     }
 
     // Getters e Setters
@@ -27,11 +59,11 @@ public class Sessao {
         this.idSessao = idSessao;
     }
 
-    public LocalDateTime getDataHoraSessao() {
+    public String getDataHoraSessao() {
         return dataHoraSessao;
     }
 
-    public void setDataHoraSessao(LocalDateTime dataHoraSessao) {
+    public void setDataHoraSessao(String dataHoraSessao) {
         this.dataHoraSessao = dataHoraSessao;
     }
 
@@ -65,15 +97,5 @@ public class Sessao {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    // Método para exibir detalhes da sessão
-    public void exibirDetalhes() {
-        System.out.println("Sessão ID: " + idSessao +
-                ", Filme: " + filme.getTitulo() +
-                ", Sala: " + sala.getDescricao() +
-                ", Data/Hora: " + dataHoraSessao +
-                ", Funcionário: " + funcionario.getNome() +
-                ", Status: " + status);
     }
 }
