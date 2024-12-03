@@ -1,42 +1,12 @@
+import java.sql.SQLException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-class TipoAssento {
+import java.util.List;
+
+public class TipoAssento {
     private int idTipoAssento;
     private String descricao;
     private String status;
-    private static ArrayList<TipoAssento> tiposAssento = new ArrayList<>();
-
-    public TipoAssento(int idTipoAssento, String descricao, String status) {
-        this.idTipoAssento = idTipoAssento;
-        this.descricao = descricao;
-        this.status = status;
-    }
-
-    public boolean cadastrar(TipoAssento tipo) {
-        return tiposAssento.add(tipo);
-    }
-
-    public boolean editar(TipoAssento tipo) {
-        for (int i = 0; i < tiposAssento.size(); i++) {
-            if (tiposAssento.get(i).getIdTipoAssento() == tipo.getIdTipoAssento()) {
-                tiposAssento.set(i, tipo);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public TipoAssento consultar(int idTipoAssento) {
-        for (TipoAssento t : tiposAssento) {
-            if (t.getIdTipoAssento() == idTipoAssento) {
-                return t;
-            }
-        }
-        return null;
-    }
-
-    public ArrayList<TipoAssento> listar() {
-        return tiposAssento;
-    }
 
     public int getIdTipoAssento() {
         return idTipoAssento;
@@ -60,5 +30,45 @@ class TipoAssento {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public boolean cadastrar(TipoAssento tipoAssento) {
+        try {
+            if (tipoAssento == null) {
+                throw new SQLException("Erro ao acessar o banco: TipoAssento nulo.");
+            }
+            return true;
+        } catch (SQLException e) {
+            System.err.println("Erro ao cadastrar TipoAssento: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean editar(TipoAssento tipoAssento) {
+        try {
+            if (tipoAssento == null) {
+                throw new SQLException("Erro ao acessar o banco: TipoAssento nulo.");
+            }
+            return true;
+        } catch (SQLException e) {
+            System.err.println("Erro ao editar TipoAssento: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public TipoAssento consultar(int idTipoAssento) {
+        try {
+            if (idTipoAssento <= 0) {
+                throw new SQLException("ID inválido.");
+            }
+            return new TipoAssento();
+        } catch (SQLException e) {
+            System.err.println("Erro ao consultar TipoAssento: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public List<TipoAssento> listar() {
+        return new ArrayList<>();
     }
 }

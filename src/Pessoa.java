@@ -8,6 +8,9 @@ abstract class Pessoa {
         this.nome = nome;
         this.email = email;
     }
+    public Pessoa(){
+
+    }
 
     public String getCpf() {
         return cpf;
